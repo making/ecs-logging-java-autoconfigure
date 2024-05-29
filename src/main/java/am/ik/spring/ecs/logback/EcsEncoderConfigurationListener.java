@@ -30,13 +30,13 @@ public class EcsEncoderConfigurationListener implements GenericApplicationListen
 	@Override
 	public boolean supportsSourceType(Class<?> sourceType) {
 		return SpringApplication.class.isAssignableFrom(sourceType)
-			   || ApplicationContext.class.isAssignableFrom(sourceType);
+				|| ApplicationContext.class.isAssignableFrom(sourceType);
 	}
 
 	@Override
 	public void onApplicationEvent(ApplicationEvent event) {
 		if (!ClassUtils.isPresent("ch.qos.logback.classic.LoggerContext", null)
-			|| !ClassUtils.isPresent("co.elastic.logging.logback.EcsEncoder", null)) {
+				|| !ClassUtils.isPresent("co.elastic.logging.logback.EcsEncoder", null)) {
 			return;
 		}
 		if (event instanceof ApplicationEnvironmentPreparedEvent applicationEnvironmentPreparedEvent) {
@@ -47,20 +47,16 @@ public class EcsEncoderConfigurationListener implements GenericApplicationListen
 			Binder binder = Binder.get(applicationEnvironmentPreparedEvent.getEnvironment());
 			EcsEncoder ecsEncoder = new EcsEncoder();
 			this.configureEcsEncoder(ecsEncoder, binder);
-			loggerContext.getLoggerList()
-					.forEach(logger -> logger.iteratorForAppenders()
-							.forEachRemaining(appender -> {
-								if (appender instanceof OutputStreamAppender<ILoggingEvent>) {
-									((OutputStreamAppender<ILoggingEvent>) appender).setEncoder(ecsEncoder);
-								}
-							}));
+			loggerContext.getLoggerList().forEach(logger -> logger.iteratorForAppenders().forEachRemaining(appender -> {
+				if (appender instanceof OutputStreamAppender<ILoggingEvent>) {
+					((OutputStreamAppender<ILoggingEvent>) appender).setEncoder(ecsEncoder);
+				}
+			}));
 		}
 	}
 
 	void configureEcsEncoder(EcsEncoder ecsEncoder, Binder binder) {
-		binder
-				.bind("spring.application.name", String.class)
-				.ifBound(ecsEncoder::setServiceName);
+		binder.bind("spring.application.name", String.class).ifBound(ecsEncoder::setServiceName);
 	}
 
 	@Override
