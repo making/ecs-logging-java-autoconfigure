@@ -1,0 +1,15 @@
+{
+  "groups": [
+    {
+      "name": "logging.logback.ecs-encoder"
+    }
+  ],
+  "properties": [
+    {
+      "name": "logging.logback.ecs-encoder.enabled",
+      "type": "java.lang.Boolean",
+      "defaultValue": true
+    }
+  ],
+  "hints": []
+}

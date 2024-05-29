@@ -45,6 +45,10 @@ public class EcsEncoderConfigurationListener implements GenericApplicationListen
 				return;
 			}
 			Binder binder = Binder.get(applicationEnvironmentPreparedEvent.getEnvironment());
+			boolean enabled = binder.bind("logging.logback.ecs-encoder.enabled", Boolean.class).orElse(true);
+			if (!enabled) {
+				return;
+			}
 			EcsEncoder ecsEncoder = new EcsEncoder();
 			this.configureEcsEncoder(ecsEncoder, binder);
 			loggerContext.getLoggerList().forEach(logger -> logger.iteratorForAppenders().forEachRemaining(appender -> {
