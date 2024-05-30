@@ -6,7 +6,7 @@
 
 	<groupId>am.ik.spring.ecs</groupId>
 	<artifactId>logback-ecs-encoder-autoconfigure</artifactId>
-	<version>0.1.2-SNAPSHOT</version>
+	<version>0.1.2</version>
 	<name>logback-ecs-encoder-autoconfigure</name>
 	<description>AutoConfiguration for ECS Logback Encoder</description>
 
