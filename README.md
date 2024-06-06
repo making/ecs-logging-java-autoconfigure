@@ -4,7 +4,7 @@
 		<dependency>
 			<groupId>am.ik.spring.ecs</groupId>
 			<artifactId>logback-ecs-encoder-autoconfigure</artifactId>
-			<version>0.1.2</version>
+			<version>0.1.3</version>
 		</dependency>
 ```
 
