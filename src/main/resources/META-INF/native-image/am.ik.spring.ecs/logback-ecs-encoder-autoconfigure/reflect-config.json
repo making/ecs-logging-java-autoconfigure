@@ -1,0 +1,10 @@
+[
+  {
+    "name": "co.elastic.logging.logback.EcsEncoder",
+    "allPublicConstructors": true
+  },
+  {
+    "name": "ch.qos.logback.classic.LoggerContext",
+    "allPublicConstructors": true
+  }
+]
